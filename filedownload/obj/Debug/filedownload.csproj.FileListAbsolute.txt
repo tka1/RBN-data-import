@@ -1,0 +1,14 @@
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\bin\Debug\filedownload.exe.config
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\obj\Debug\filedownload.csprojResolveAssemblyReference.cache
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\obj\Debug\filedownload.Form1.resources
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\obj\Debug\filedownload.Properties.Resources.resources
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\obj\Debug\filedownload.csproj.GenerateResource.Cache
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\bin\Debug\filedownload.exe
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\bin\Debug\filedownload.pdb
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\obj\Debug\filedownload.exe
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\obj\Debug\filedownload.pdb
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\bin\Debug\HtmlAgilityPack.dll
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\bin\Debug\HtmlAgilityPack.pdb
+e:\tomi\documents\visual studio 2015\Projects\filedownload\filedownload\bin\Debug\HtmlAgilityPack.xml
+E:\Tomi\Documents\Visual Studio 2015\Projects\filedownload\filedownload\bin\Debug\Npgsql.dll
+E:\Tomi\Documents\Visual Studio 2015\Projects\filedownload\filedownload\bin\Debug\Npgsql.xml
