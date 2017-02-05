@@ -19,6 +19,10 @@ namespace filedownload
         public Form1()
         {
             InitializeComponent();
+
+      dloadPath.Text= @"e:\rbndata\" ;
+            unzip_folder.Text = @"e:\temp\rbndata\";
+
         }
 
         public static DataTable RetrieveSourceData(String filename)
@@ -82,8 +86,12 @@ namespace filedownload
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string[] filenames = Directory.GetFiles(@"e:\rbndata");
-            string extractPath = @"e:\temp\rbndata";
+            String RbnPath;
+            RbnPath = dloadPath.Text;
+            //string[] filenames = Directory.GetFiles(@"e:\rbndata");
+            string[] filenames = Directory.GetFiles(RbnPath);
+            //string extractPath = @"e:\temp\rbndata";
+            string extractPath = unzip_folder.Text;
             foreach (string name in filenames)
             {
                 string newfilename = name.Substring(0, name.Length - 3) + "txt";
@@ -119,11 +127,14 @@ namespace filedownload
             string freq_orig = "";
             decimal freq = 0;
             decimal db = 0;
+            string rbndatafolder = unzip_folder.Text;
+           
+
             using (StreamWriter ww = File.AppendText(@"e:\temp\rbndata\temppi\new\log.txt"))
             {
                  ww.WriteLine("started  " + DateTime.Now);
             }
-            string[] files = Directory.GetFiles(@"e:\temp\rbndata");
+            string[] files = Directory.GetFiles(rbndatafolder);
 
 
 
@@ -131,6 +142,11 @@ namespace filedownload
 
             foreach (string name in files)
             {
+
+                using (StreamWriter ww = File.AppendText(@"e:\temp\rbndata\log.txt"))
+                {
+                    ww.WriteLine(DateTime.Now + "  " + name);
+                }
                 textBox1.AppendText(name + "\r\n");
                 string[] rows = File.ReadAllLines(name);
                 for (int i = 0; i <= rows.Length - 1; i++)
@@ -203,7 +219,6 @@ namespace filedownload
                             cmd.Parameters.Add(new NpgsqlParameter("value11", NpgsqlTypes.NpgsqlDbType.Timestamp));
                             cmd.Parameters.Add(new NpgsqlParameter("value12", NpgsqlTypes.NpgsqlDbType.Text));
                             cmd.Parameters.Add(new NpgsqlParameter("value13", NpgsqlTypes.NpgsqlDbType.Text));
-
                             cmd.Parameters[0].Value = newrow[0];
                             cmd.Parameters[1].Value = newrow[1];
                             cmd.Parameters[2].Value = newrow[2];
@@ -259,6 +274,13 @@ namespace filedownload
             
             Regex regex = new Regex(@"href=");
             int kountti = 0;
+            String RbnPath;
+           // RbnPath = @"e:\rbndata\";
+            RbnPath = dloadPath.Text;
+            textBox1.AppendText(RbnPath + "\r\n");
+
+            String RBNYear;
+            RBNYear = textBox_year.Text;
             foreach (HtmlNode item in nodes)
             {
 
@@ -270,15 +292,14 @@ namespace filedownload
                     string link = hreflink.Substring(13, 17);
                     WebClient webClient = new WebClient();
                     string year = link.Substring(link.Length - 8, 4);
-                    textBox1.AppendText(year + "\r\n");
-                    string downloadYear = "2016";
-
-                           if (year.Equals(downloadYear))
-                      
+                    //textBox1.AppendText(year + "\r\n");
+                   // string downloadYear = RBNYear;
+                    
+                    if (year.Equals(RBNYear))
                     { 
                     try
                     {
-                            webClient.DownloadFile("http://www.reversebeacon.net/raw_data/" + link, @"e:\rbndata\" + link.Substring(link.Length - 8, 8) + ".zip");
+                            webClient.DownloadFile("http://www.reversebeacon.net/raw_data/" + link, RbnPath + link.Substring(link.Length - 8, 8) + ".zip");
                             textBox1.AppendText("http://www.reversebeacon.net/raw_data/" + link + " " + link.Substring(link.Length - 8, 8) + "\r\n");
                         }
                     catch (Exception ee)
@@ -369,6 +390,36 @@ namespace filedownload
             }
 
 
+
+        }
+
+        private void dloadPath_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox_year_MouseClick(object sender, MouseEventArgs e)
+        {
+            textBox_year.Text = "";
+        }
+
+        private void dloadPath_MouseClick(object sender, MouseEventArgs e)
+        {
+           // dloadPath.Text = "";
+        }
+
+        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        private void unzip_folder_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }
