@@ -20,8 +20,8 @@ namespace filedownload
         {
             InitializeComponent();
 
-      dloadPath.Text= @"e:\rbndata\" ;
-            unzip_folder.Text = @"e:\temp\rbndata\";
+      dloadPath.Text= @"h:\rbndata\" ;
+            unzip_folder.Text = @"h:\temp\rbndata\";
 
         }
 
@@ -32,7 +32,7 @@ namespace filedownload
             //connection string changes depending on the operation  
             //system you are running  
             string sourceConnString = @"Provider=Microsoft.Jet.OLEDB.4.0; 
-                                        Data Source=e:\; 
+                                        Data Source=h:\; 
                                         Extended Properties=text;";
             DataTable sourceData = new DataTable();
             using (OleDbConnection conn =
@@ -269,7 +269,7 @@ namespace filedownload
         private void button3_Click(object sender, EventArgs e)
         {
             HtmlWeb web = new HtmlWeb();
-           HtmlAgilityPack.HtmlDocument document2 = web.Load("http://www.reversebeacon.net/raw_data/");
+           HtmlAgilityPack.HtmlDocument document2 = web.Load("https://www.reversebeacon.net/raw_data/");
            HtmlNode[] nodes = document2.DocumentNode.SelectNodes("//td").ToArray();
             
             Regex regex = new Regex(@"href=");
@@ -283,24 +283,27 @@ namespace filedownload
             RBNYear = textBox_year.Text;
             foreach (HtmlNode item in nodes)
             {
+                //textBox1.AppendText(item.OuterHtml + "\r\n");
 
                 Match match = regex.Match(item.OuterHtml);
                 if (match.Success)
                 {
                     // textBox1.AppendText(item.OuterHtml + "\r\n");
                     string hreflink = item.OuterHtml;
-                    string link = hreflink.Substring(13, 17);
+                    string link = hreflink.Substring(hreflink.Length-21, 12);
+                    textBox1.AppendText(link + "\r\n");
                     WebClient webClient = new WebClient();
-                    string year = link.Substring(link.Length - 8, 4);
-                    //textBox1.AppendText(year + "\r\n");
-                   // string downloadYear = RBNYear;
-                    
+                    string year = link.Substring(link.Length - 12, 4);
+                   textBox1.AppendText(year + "\r\n");
+                    string downloadYear = RBNYear;
+                  
+
                     if (year.Equals(RBNYear))
                     { 
                     try
                     {
-                            webClient.DownloadFile("http://www.reversebeacon.net/raw_data/" + link, RbnPath + link.Substring(link.Length - 8, 8) + ".zip");
-                            textBox1.AppendText("http://www.reversebeacon.net/raw_data/" + link + " " + link.Substring(link.Length - 8, 8) + "\r\n");
+                            webClient.DownloadFile("https://data.reversebeacon.net/rbn_history/" + link, RbnPath + link.Substring(link.Length - 8, 8) + ".zip");
+                            textBox1.AppendText("https://data.reversebeacon.net/rbn_history/" + link + " " + link.Substring(link.Length - 8, 8) + "\r\n");
                         }
                     catch (Exception ee)
                     { MessageBox.Show(ee.ToString()); }
